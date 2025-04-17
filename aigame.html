@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Just Me Idle: (G)I-DLE Song Match</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: auto;
+      min-height: 100%;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #ffe4f1, #f3ecf9);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    h1 {
+      text-align: center;
+      font-family: 'Pacifico', cursive;
+      color: #ff7eb9;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    .selection-box {
+      background: linear-gradient(to bottom, #fff, #ffe9f4);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: inset 0 0 10px rgba(255, 126, 185, 0.2), 0 10px 25px rgba(255, 126, 185, 0.3);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .selection-box:hover {
+      transform: scale(1.015);
+    }
+
+    .selector-group {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ffc1da;
+      background-color: #fff;
+      box-shadow: 0 3px 8px rgba(255, 126, 185, 0.1);
+    }
+
+    button {
+      background-color: #ff7eb9;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      margin: 15px auto 0;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e4679e;
+    }
+
+    #result {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 26px;
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      position: relative;
+    }
+
+    #result.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    iframe {
+      margin-top: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      max-width: 100%;
+    }
+
+    .sparkles::after {
+      content: '✨';
+      font-size: 24px;
+      animation: sparkle 1.2s infinite alternate ease-in-out;
+      position: absolute;
+      top: -10px;
+      right: 10px;
+    }
+
+    @keyframes sparkle {
+      0% { transform: rotate(0deg) scale(1); opacity: 0.6; }
+      100% { transform: rotate(20deg) scale(1.2); opacity: 1; }
+    }
+
+    /* Floating sparkles */
+    .floating-sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: radial-gradient(circle, #fff 40%, transparent 70%);
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: floatUp 8s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body id="page">
+
+    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h1 style="font-family: 'Pacifico', cursive; color: #ff7eb9; font-size: 36px; margin: 0;">
+          Just Me Idle: (G)I-DLE Song Match
+        </h1>
+        <a href="scratch.html" style="text-decoration: none;">
+          <button style="
+            background-color: #ffe4f1;
+            color: #ff7eb9;
+            border: 2px solid #ffb3d1;
+            padding: 10px 16px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+          " onmouseover="this.style.backgroundColor='#ffecf5'; this.style.transform='scale(1.05)';"
+             onmouseout="this.style.backgroundColor='#ffe4f1'; this.style.transform='scale(1)';">
+            ← Home
+          </button>
+        </a>
+      </header>      
+
+  <div class="selection-box">
+    <div class="selector-group">
+      <label for="speed">Choose speed:</label>
+      <select id="speed">
+        <option value="fast">Fast</option>
+        <option value="slow">Slow</option>
+      </select>
+    </div>
+
+    <div class="selector-group">
+      <label for="color">Choose color:</label>
+      <select id="color">
+        <option value="pink">Pink</option>
+        <option value="black">Purple</option>
+      </select>
+    </div>
+
+    <div class="selector-group">
+      <label for="time">Choose vibe:</label>
+      <select id="time">
+        <option value="new">New</option>
+        <option value="old">Old</option>
+      </select>
+    </div>
+
+    <button onclick="getSong()">Get My Song</button>
+    <button onclick="resetForm()">Reset</button>
+  </div>
+
+  <div id="result"></div>
+
+  <!-- Floating sparkles -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('floating-sparkle');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.animationDelay = (Math.random() * 5) + 's';
+      sparkle.style.width = sparkle.style.height = (Math.random() * 6 + 4) + 'px';
+      document.body.appendChild(sparkle);
+    }
+  </script>
+
+  <!-- Song logic & easter egg -->
+  <script>
+    const songMap = {
+      'fast-pink-new': 'TOMBOY',
+      'fast-pink-old': 'Hear Me',
+      'fast-black-new': 'Super Lady',
+      'fast-black-old': 'Dahlia',
+      'slow-pink-new': 'Lucid',
+      'slow-pink-old': 'Maze',
+      'slow-black-new': 'Vision',
+      'slow-black-old': 'HWAA'
+    };
+
+    function getSong() {
+      const speed = document.getElementById('speed').value;
+      let color = document.getElementById('color').value;
+      const time = document.getElementById('time').value;
+      const resultDiv = document.getElementById('result');
+
+      if (color === "Purple" || color === "purple") color = "black";
+
+      const key = `${speed}-${color}-${time}`;
+      const song = songMap[key];
+
+      resultDiv.classList.remove('show', 'sparkles');
+      resultDiv.innerHTML = '';
+
+      if (speed === 'slow' && color === 'pink' && time === 'old') {
+        resultDiv.innerHTML = `
+          <div class="sparkles">🎉 Secret Neverland Mode Unlocked!<br><span style="font-size: 36px;">"Last Forever" 💖</span></div>
+          <p style="margin-top: 15px;">This one’s for the true Neverlands. You found the hidden vibe 💫</p>
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/et3VDbL7cIA?si=B5xI38g5s_ALhyRT"
+            title="(G)I-DLE Killing Voice" frameborder="0" allowfullscreen></iframe>
+        `;
+      } else if (song) {
+        resultDiv.innerHTML = `
+          <div class="sparkles">Your (G)I-DLE song is:<br><span style="font-size: 36px;">${song} 🎶</span></div>
+          <p style="margin-top: 15px;">Want more (G)I-DLE? Check out their <strong>Killing Voice</strong> performance!</p>
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/et3VDbL7cIA?si=B5xI38g5s_ALhyRT"
+            title="(G)I-DLE Killing Voice" frameborder="0" allowfullscreen></iframe>
+        `;
+      } else {
+        resultDiv.textContent = "That combo doesn’t exist! Try a different mix.";
+      }
+
+      setTimeout(() => {
+        resultDiv.classList.add('show');
+      }, 100);
+    }
+
+    function resetForm() {
+      document.getElementById('speed').value = 'fast';
+      document.getElementById('color').value = 'pink';
+      document.getElementById('time').value = 'new';
+      document.getElementById('result').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html>

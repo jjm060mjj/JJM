@@ -1,0 +1,74 @@
+h1 {
+    font-size: 80px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: pink;
+}
+h2{
+    font-size: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color:lightpink;
+}
+p{
+    font-size: 30px;
+    color: lightpink;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+ol{
+    font-size: 20px;
+    color: lightpink;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+a {
+        font-size: 30px;
+        color: lightpink;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.emphasis{
+    font-weight: bold;
+    color: pink;
+    font-size: 35px;
+}
+body{
+    text-align: center;
+    padding: 20px;
+    border: 40px;
+    border-color: pink;
+    margin: 20px;
+    background-color: rgb(2, 2, 30)
+}
+.centered-list {
+    list-style-position: inside;
+    text-align: center;
+    padding-left: 0;
+  }
+  footer{
+
+        position: fixed;
+        background-color: black;
+        color: white;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        height: 30px;
+        line-height: 30px;
+  }
+  img{
+    display: block;
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+.viz-container {
+    display: block;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.special {
+        width: 50%;
+        height: 90vh; /* 90% of the screen height */
+        border: none;
+        margin-left: auto;
+        margin-right: auto;
+}
