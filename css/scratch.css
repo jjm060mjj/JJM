@@ -35,7 +35,7 @@ body{
     border: 40px;
     border-color: pink;
     margin: 20px;
-    background-color: rgb(2, 2, 30)
+    background-color: rgb(2, 2, 30);
 }
 .centered-list {
     list-style-position: inside;
@@ -45,7 +45,7 @@ body{
   footer{
 
         position: fixed;
-        background-color: black;
+        background-color: rgb(2, 2, 30);
         color: white;
         bottom: 0px;
         left: 0px;

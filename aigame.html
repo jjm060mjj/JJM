@@ -122,7 +122,6 @@
       100% { transform: rotate(20deg) scale(1.2); opacity: 1; }
     }
 
-    /* Floating sparkles */
     .floating-sparkle {
       position: absolute;
       width: 10px;
@@ -147,31 +146,57 @@
         opacity: 0;
       }
     }
+
+    /* Purple Theme */
+    body.purple-theme {
+      background: linear-gradient(135deg, #e5d5ff, #f1e7ff);
+      color: #3b2c4a;
+    }
+
+    body.purple-theme .selection-box {
+      background: linear-gradient(to bottom, #f9f4ff, #efe0ff);
+      box-shadow: inset 0 0 10px rgba(155, 126, 255, 0.2), 0 10px 25px rgba(155, 126, 255, 0.3);
+    }
+
+    body.purple-theme button {
+      background-color: #b38cff;
+    }
+
+    body.purple-theme button:hover {
+      background-color: #9b72e8;
+    }
+
+    body.purple-theme h1 {
+      color: #9f78e1;
+    }
+
+    body.purple-theme select {
+      border: 1px solid #d4c1ff;
+      box-shadow: 0 3px 8px rgba(155, 126, 255, 0.1);
+    }
   </style>
 </head>
 <body id="page">
 
-    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
-        <h1 style="font-family: 'Pacifico', cursive; color: #ff7eb9; font-size: 36px; margin: 0;">
-          Just Me Idle: (G)I-DLE Song Match
-        </h1>
-        <a href="scratch.html" style="text-decoration: none;">
-          <button style="
-            background-color: #ffe4f1;
-            color: #ff7eb9;
-            border: 2px solid #ffb3d1;
-            padding: 10px 16px;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-          " onmouseover="this.style.backgroundColor='#ffecf5'; this.style.transform='scale(1.05)';"
-             onmouseout="this.style.backgroundColor='#ffe4f1'; this.style.transform='scale(1)';">
-            ← Home
-          </button>
-        </a>
-      </header>      
+  <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h1>Just Me Idle: (G)I-DLE Song Match</h1>
+    <a href="scratch.html" style="text-decoration: none;">
+      <button style="
+        background-color: #ffe4f1;
+        color: #ff7eb9;
+        border: 2px solid #ffb3d1;
+        padding: 10px 16px;
+        font-weight: bold;
+        font-size: 14px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      " onmouseover="this.style.backgroundColor='#ffecf5'; this.style.transform='scale(1.05)';"
+         onmouseout="this.style.backgroundColor='#ffe4f1'; this.style.transform='scale(1)';">
+        ← Home
+      </button>
+    </a>
+  </header>
 
   <div class="selection-box">
     <div class="selector-group">
@@ -204,7 +229,6 @@
 
   <div id="result"></div>
 
-  <!-- Floating sparkles -->
   <script>
     for (let i = 0; i < 20; i++) {
       const sparkle = document.createElement('div');
@@ -214,10 +238,7 @@
       sparkle.style.width = sparkle.style.height = (Math.random() * 6 + 4) + 'px';
       document.body.appendChild(sparkle);
     }
-  </script>
 
-  <!-- Song logic & easter egg -->
-  <script>
     const songMap = {
       'fast-pink-new': 'TOMBOY',
       'fast-pink-old': 'Hear Me',
@@ -234,11 +255,18 @@
       let color = document.getElementById('color').value;
       const time = document.getElementById('time').value;
       const resultDiv = document.getElementById('result');
+      const body = document.getElementById('page');
 
-      if (color === "Purple" || color === "purple") color = "black";
+      if (color.toLowerCase() === "purple") color = "black";
 
       const key = `${speed}-${color}-${time}`;
       const song = songMap[key];
+
+      if (color === 'black') {
+        body.classList.add('purple-theme');
+      } else {
+        body.classList.remove('purple-theme');
+      }
 
       resultDiv.classList.remove('show', 'sparkles');
       resultDiv.innerHTML = '';
@@ -271,8 +299,8 @@
       document.getElementById('color').value = 'pink';
       document.getElementById('time').value = 'new';
       document.getElementById('result').classList.remove('show');
+      document.getElementById('page').classList.remove('purple-theme');
     }
   </script>
-
 </body>
 </html>
